@@ -62,14 +62,19 @@ public class Comprador extends Usuario{
     
     public void verVehiculos(ArrayList<Vehiculo> vehiculos){
         Scanner sc = new Scanner(System.in);
-        int opc; int valor; Vehiculo v;
+        int opc; int valor; Vehiculo v; String tipo;
         if(vehiculos.isEmpty())
             System.out.println("No se encontraron resultados");
         else{
             for(int i = 0; i < vehiculos.size(); i++){
                 System.out.println("Vehículo " + (i+1));
                 v = vehiculos.get(i);
-                System.out.println(v.marca + " " + v.modelo + " - Recorrido: " + v.recorrido + " - Año: " + v.año + " - Precio: " + v.precio);
+                tipo = "Moto";
+                if(v instanceof Camioneta)
+                    tipo = "Camioneta";
+                else if(v instanceof Auto)
+                    tipo = "Auto";
+                System.out.println(tipo + " - " + v.marca + " " + v.modelo + " - Recorrido: " + v.recorrido + " - Año: " + v.año + " - Precio: " + v.precio);
                 if(vehiculos.size() == 1){
                     System.out.println("Selecciona una opción: \n1. Ofertar");
                     opc = sc.nextInt();

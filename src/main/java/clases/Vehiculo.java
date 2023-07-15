@@ -181,20 +181,27 @@ public class Vehiculo {
         System.out.println("Ha aceptado la oferta!");
         String cuerpo = "El propietario del vehículo:\n" + this.marca + " " + this.modelo + " - Placa: " + this.placa + " - Recorrido: " + this.recorrido + " - Año: " + this.año + "\nHa aceptado tu oferta de: " + this.ofertas.get(i).getValor();
         Utilitaria.sendMensaje(this.ofertas.get(i).getComprador().getCorreo(), "¡Una de sus ofertas ha sido aceptada!", cuerpo + "\nCorreo del propietario: " + ven.getCorreo());
-        ArrayList<Oferta> newOfertas = ofertas;
-        ArrayList<Vehiculo> newVehiculos = vehiculos;
-        newOfertas.remove(this.ofertas.get(i));
-        newVehiculos.remove(this);
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File("ofertas.txt")))){
-            for(Oferta o : newOfertas){
-                pw.println(o);
+        ArrayList<Vehiculo> oldVehiculos = readFile();
+        ofertas.removeAll(this.ofertas);
+        vehiculos.remove(this);
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File("vehiculos.txt")))){
+            Vehiculo v;
+            for(int newId = 0; newId < vehiculos.size(); newId++){
+                v = vehiculos.get(newId);
+                v.setId(newId+1);
+                pw.println(v + "|" + v.getIdVendedor());
             }
         }
         catch(Exception e){
         }
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File("vehiculos.txt")))){
-            for(Vehiculo v : newVehiculos){
-                pw.println(v);
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File("ofertas.txt")))){
+            Oferta o; int idV;
+            for(int newId = 0; newId < ofertas.size(); newId++){
+                o = ofertas.get(newId);
+                o.setId(newId+1);
+                idV = searchPlaca(vehiculos, searchID(oldVehiculos, o.getIdVehiculo()).placa).id;
+                o.setIdVehiculo(idV);
+                pw.println(o);
             }
         }
         catch(Exception e){
