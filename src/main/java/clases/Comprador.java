@@ -67,7 +67,7 @@ public class Comprador extends Usuario{
             System.out.println("No se encontraron resultados");
         else{
             for(int i = 0; i < vehiculos.size(); i++){
-                System.out.println("Vehiculo " + (i+1));
+                System.out.println("Vehículo " + (i+1));
                 v = vehiculos.get(i);
                 System.out.println(v.marca + " " + v.modelo + " - Recorrido: " + v.recorrido + " - Año: " + v.año + " - Precio: " + v.precio);
                 if(vehiculos.size() == 1){
