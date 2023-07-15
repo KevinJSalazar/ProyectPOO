@@ -79,15 +79,15 @@ public class Utilitaria {
                     System.out.println("Ingrese la placa:");
                     String placa = sc.nextLine();
                     v = Vehiculo.searchPlaca(vehiculos, placa);
-                }while(v == null);
-                if(v.getIdVendedor() != ven.getId())
-                    System.out.println("La placa que ingresó pertenece a un vehículo que no es suyo");
-                else if(v.getOfertas().isEmpty())
+                    if(v.getIdVendedor() != ven.getId())
+                        System.out.println("La placa que ingresó pertenece a un vehículo que no es suyo");
+                }while(v == null && v.getIdVendedor() != ven.getId());
+                if(v.getOfertas().isEmpty())
                     System.out.println("No se han realizado ofertas");
                 else{
                     System.out.println(v.getMarca() + " " + v.getModelo() + " " + v.getRecorrido() + " Precio: " + v.getPrecio());
                     System.out.println("Se han realizado " + v.getOfertas().size() + " ofertas");
-                    v.verOfertas(vehiculos, ofertas);
+                    v.verOfertas(vehiculos, ofertas, ven);
                 }
                 break;
             case 4:

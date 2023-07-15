@@ -130,7 +130,7 @@ public class Vehiculo {
         return null;
     }
     
-    public void verOfertas(ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas){
+    public void verOfertas(ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas, Vendedor v){
         Scanner sc = new Scanner(System.in);
         int opc; int Id;
         for(int i = 0; i < this.ofertas.size(); i++){
@@ -142,13 +142,13 @@ public class Vehiculo {
                 System.out.println("Selecciona una opción: \n1. Aceptar oferta");
                 opc = sc.nextInt();
                 if(opc == 1)
-                    this.aceptarOferta(i, vehiculos, ofertas);
+                    this.aceptarOferta(i, vehiculos, ofertas, v);
             }
             else if(i == 0){
                 System.out.println("Selecciona una opción: \n1. Siguiente oferta \n2. Aceptar oferta");
                 opc = sc.nextInt();
                 if(opc == 2)
-                    this.aceptarOferta(i, vehiculos, ofertas);
+                    this.aceptarOferta(i, vehiculos, ofertas, v);
             }
             else if((i+1) == this.ofertas.size()){
                 System.out.println("Selecciona una opción: \n1. Anterior oferta \n2. Aceptar oferta");
@@ -158,7 +158,7 @@ public class Vehiculo {
                         i -= 2;
                         break;
                     case 2:
-                        this.aceptarOferta(i, vehiculos, ofertas);
+                        this.aceptarOferta(i, vehiculos, ofertas, v);
                 }
             }
             else{
@@ -171,16 +171,16 @@ public class Vehiculo {
                         i -= 2;
                         break;
                     case 3:
-                        this.aceptarOferta(i, vehiculos, ofertas);
+                        this.aceptarOferta(i, vehiculos, ofertas, v);
                 }
             }
         }
     }
     
-    public void aceptarOferta(int i, ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas){
+    public void aceptarOferta(int i, ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas, Vendedor ven){
         System.out.println("Ha aceptado la oferta!");
         String cuerpo = "El propietario del vehículo:\n" + this.marca + " " + this.modelo + " - Placa: " + this.placa + " - Recorrido: " + this.recorrido + " - Año: " + this.año + "\nHa aceptado tu oferta de: " + this.ofertas.get(i).getValor();
-        Utilitaria.sendMensaje(this.ofertas.get(i).getComprador().getCorreo(), "Una oferta ha sido aceptada!", cuerpo);
+        Utilitaria.sendMensaje(this.ofertas.get(i).getComprador().getCorreo(), "Una de sus ofertas ha sido aceptada!", cuerpo + "\nCorreo del propietario: " + ven.getCorreo());
         ArrayList<Oferta> newOfertas = ofertas;
         ArrayList<Vehiculo> newVehiculos = vehiculos;
         newOfertas.remove(this.ofertas.get(i));
