@@ -179,7 +179,12 @@ public class Vehiculo {
     
     public void aceptarOferta(int i, ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas, Vendedor ven){
         System.out.println("Ha aceptado la oferta!");
-        String cuerpo = "El propietario del vehículo:\n" + this.marca + " " + this.modelo + " - Placa: " + this.placa + " - Recorrido: " + this.recorrido + " - Año: " + this.año + "\nHa aceptado tu oferta de: " + this.ofertas.get(i).getValor();
+        String tipo = "Moto";
+            if(this instanceof Camioneta)
+                tipo = "Camioneta";
+            else if(this instanceof Auto)
+                tipo = "Auto";
+        String cuerpo = "El propietario del vehículo:\n" + tipo + " " + this.marca + " " + this.modelo + " - Placa: " + this.placa + " - Recorrido: " + this.recorrido + " - Año: " + this.año + "\nHa aceptado tu oferta de: " + this.ofertas.get(i).getValor();
         Utilitaria.sendMensaje(this.ofertas.get(i).getComprador().getCorreo(), "¡Una de sus ofertas ha sido aceptada!", cuerpo + "\nCorreo del propietario: " + ven.getCorreo());
         ArrayList<Vehiculo> oldVehiculos = readFile();
         ofertas.removeAll(this.ofertas);
