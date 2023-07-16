@@ -27,7 +27,7 @@ public class Auto extends Vehiculo{
         }while(checkPlaca(vehiculos, placa));
         System.out.println("Marca:");
         String ma = sc.nextLine();
-        System.out.println("Modelo:")
+        System.out.println("Modelo:");
         String mo = sc.nextLine();
         System.out.println("Tipo de motor:");
         String tm = sc.nextLine();
